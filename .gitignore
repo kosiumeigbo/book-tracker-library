@@ -1,0 +1,7 @@
+**/node_modules
+**/dist
+client/server
+**/.DS_Store
+**/.parcel-cache
+**/testData.ts
+client/src/components/*TestComponent.ts
