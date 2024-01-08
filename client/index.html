@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Tracker</title>
+    <script src="https://kit.fontawesome.com/897d8674f6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./src/styles/main.css" />
+    <script type="module" src="./src/index.ts"></script>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <div class="close-btn">X</div>
+        <div>
+          <a class="nav-bold" href="/" data-link><i class="fa-solid fa-house-user"></i>Home</a>
+        </div>
+
+        <hr />
+        <hr />
+
+        <div>
+          <a class="nav-bold" href="/search" data-link><i class="fa-solid fa-magnifying-glass"></i>Search</a>
+        </div>
+
+        <hr />
+        <hr />
+
+        <div>
+          <a class="nav-bold library" href="/library" data-link>
+            <span>
+              <i class="fa-solid fa-bookmark"></i>
+              Library
+            </span>
+            <span id="library-total">0</span>
+          </a>
+        </div>
+
+        <hr />
+
+        <div>
+          <a href="/sub-library?q=booksInProgress" class="sub-library" data-link>
+            <span>
+              <i class="fa-solid fa-book-open"></i>
+              In Progress
+            </span>
+            <span id="books-in-progress-total">0</span>
+          </a>
+        </div>
+
+        <div>
+          <a href="/sub-library?q=booksToRead" class="sub-library" data-link>
+            <span>
+              <i class="fa-solid fa-list"></i>
+              To Read
+            </span>
+            <span id="books-to-read-total">0</span>
+          </a>
+        </div>
+
+        <div>
+          <a href="/sub-library?q=booksDone" class="sub-library" data-link>
+            <span>
+              <i class="fa-solid fa-check"></i>
+              Done
+            </span>
+            <span id="books-done-total">0</span>
+          </a>
+        </div>
+        <hr />
+        <hr />
+      </nav>
+
+      <!--  -->
+
+      <p class="hamburger"><i class="fa-solid fa-bars"></i></p>
+      <div id="root">
+        <!-- <sub-lib-page /> -->
+
+        <!-- <div class="sub-lib-page"></div> -->
+
+        <!-- <sub-lib-page /> -->
+
+        <!-- <book-page /> -->
+
+        <!-- <div class="book-page">
+          <div class="book-page__title">
+            <h1>The Exchange</h1>
+            <p>by <span style="text-decoration: underline; font-style: italic">John Grisham</span></p>
+          </div>
+          <div class="book-page__panel">
+            <div class="image"><img src="https://covers.openlibrary.org/b/id/14097617-L.jpg" alt="Book Cover Photo" /></div>
+            <div class="add-to-lib-buttons">
+              <button
+                data-isbn="9780593669891"
+                data-library="booksInProgress"
+                title="Add to or Remove from 'Books In Progress'"
+              >
+                <i class="fa-solid fa-circle-plus"></i> <i class="fa-solid fa-book-open"></i>
+              </button>
+              <button
+                data-isbn="9780593669891"
+                data-library="booksToRead"
+                title="Add to or Remove from 'Books To Read'"
+              >
+                <i class="fa-solid fa-circle-plus"></i> <i class="fa-solid fa-list"></i>
+              </button>
+              <button data-isbn="9780593669891" data-library="booksDone" title="Add to or Remove from 'Books Done'">
+                <i class="fa-solid fa-circle-plus"></i> <i class="fa-solid fa-check"></i>
+              </button>
+            </div>
+            <a class="link" target="_blank" href="https://openlibrary.org/books/OL47488175M/The_Exchange">
+              Go to main site <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+          <div class="book-page__info">
+            <div class="book-page__info__title">
+              <h1>The Exchange</h1>
+              <p>by <span style="text-decoration: underline; font-style: italic">John Grisham</span></p>
+            </div>
+            <div>
+              <h3>ISBN</h3>
+              <p>9780593669891</p>
+            </div>
+            <div class="book-page__info__grid">
+              <div>
+                <h3>No. of pages</h3>
+                <p>552</p>
+              </div>
+              <div>
+                <h3>Date published</h3>
+                <p>Oct 17, 2023</p>
+              </div>
+              <div>
+                <h3>Publisher</h3>
+                <p>Random House Large Print, Diversified Publishing</p>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <library-page /> -->
+
+        <!-- <div class="library-page">
+          <h1>Library</h1>
+          <div class="sub-lib-card">
+            <h2>Books In Progress</h2>
+            <div>
+              <div class="sub-lib-book-card">
+                <a href="/book?isbn=9780593669891">
+                  <div><img src="https://covers.openlibrary.org/b/id/14097617-L.jpg" alt="cover photo" /></div>
+                  <h3>The Exchange</h3>
+                  <p><span>John Grisham</span></p>
+                </a>
+              </div>
+              <div class="sub-lib-book-card">
+                <a href="/book?isbn=9780593669891">
+                  <div><img src="https://covers.openlibrary.org/b/id/14097617-L.jpg" alt="cover photo" /></div>
+                  <h3>The Exchange</h3>
+                  <p><span>John Grisham</span></p>
+                </a>
+              </div>
+              <div class="sub-lib-book-card">
+                <a href="/book?isbn=9780593669891">
+                  <div><img src="https://covers.openlibrary.org/b/id/14097617-L.jpg" alt="cover photo" /></div>
+                  <h3>The Exchange</h3>
+                  <p><span>John Grisham</span></p>
+                </a>
+              </div>
+              <div class="sub-lib-book-card">
+                <a href="/book?isbn=9780593669891">
+                  <div><img src="https://covers.openlibrary.org/b/id/14097617-L.jpg" alt="cover photo" /></div>
+                  <h3>The Exchange</h3>
+                  <p><span>John Grisham</span></p>
+                </a>
+              </div>
+              <div class="sub-lib-book-card">
+                <a href="/book?isbn=9780593669891">
+                  <div><img src="https://covers.openlibrary.org/b/id/14097617-L.jpg" alt="cover photo" /></div>
+                  <h3>The Exchange</h3>
+                  <p><span>John Grisham</span></p>
+                </a>
+              </div>
+            </div>
+            <a href="/sub-library?q=booksInProgress"><p>View more</p></a>
+          </div>
+        </div> -->
+
+        <!-- <div class="search-page">
+          <div class="search-area">
+            <form id="search-form">
+              <label for="book-search"><h2>Search by book ISBN:</h2></label>
+              <div>
+                <input type="text" id="book-search" name="book-search" autocomplete="off" value="14097617759" />
+                <button type="submit" id="book-search-btn"><p>FIND BOOK</p></button>
+              </div>
+            </form>
+          </div>
+
+          <hr />
+
+          <div class="search-results">
+            <div class="book-obj-card">
+              <div class="book-obj-card__img">
+                <a href="/book?isbn=140976177594">
+                  <img src="https://covers.openlibrary.org/b/id/14097617-L.jpg" alt="John Grisham" />
+                </a>
+              </div>
+              <div class="book-obj-card__info">
+                <h2>The Exchange</h2>
+                <p>John Grisham</p>
+                <div>
+                  <button data-isbn="140976177594" data-library="booksInProgress" title="Add to 'Books In Progress'">
+                    <i class="fa-solid fa-circle-plus"></i> <i class="fa-solid fa-book-open"></i
+                    ><span>In Progress</span>
+                  </button>
+                  <button data-isbn="140976177594" data-library="booksToRead" title="Add to 'Books To Read'">
+                    <i class="fa-solid fa-circle-plus"></i> <i class="fa-solid fa-list"></i><span>To Read</span>
+                  </button>
+                  <button data-isbn="140976177594" data-library="booksDone" title="Add to 'Books Done'">
+                    <i class="fa-solid fa-circle-plus"></i> <i class="fa-solid fa-check"></i><span>Done</span>
+                  </button>
+                </div>
+              </div>
+              <a href="/book?isbn=140976177594">
+                Go to book page &nbsp; <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </a>
+            </div>
+
+            <div class="book-obj-card">
+              <div class="book-obj-card__img">
+                <a href="/book?isbn=140976177594">
+                  <img src="https://covers.openlibrary.org/b/id/14097617-L.jpg" alt="John Grisham" />
+                </a>
+              </div>
+              <div class="book-obj-card__info">
+                <h2>The Exchange</h2>
+                <p>John Grisham</p>
+                <div>
+                  <button data-isbn="140976177594" data-library="booksInProgress" title="Add to 'Books In Progress'">
+                    <i class="fa-regular fa-circle-check" style="color: #2aff1c"></i>
+                    <i class="fa-solid fa-book-open"></i><span>In Progress</span>
+                  </button>
+                  <button data-isbn="140976177594" data-library="booksToRead" title="Add to 'Books To Read'">
+                    <i class="fa-regular fa-circle-check" style="color: #2aff1c"></i> <i class="fa-solid fa-list"></i
+                    ><span>To Read</span>
+                  </button>
+                  <button data-isbn="140976177594" data-library="booksDone" title="Add to 'Books Done'">
+                    <i class="fa-regular fa-circle-check" style="color: #2aff1c"></i> <i class="fa-solid fa-check"></i
+                    ><span>Done</span>
+                  </button>
+                </div>
+              </div>
+              <a href="/book?isbn=140976177594">
+                Go to book page &nbsp; <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </a>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- <search-page /> -->
+
+        <!-- <home-page /> -->
+
+        <!-- HOMEPAGE  -->
+
+        <!-- <div class="category-card">
+          <h2>Fiction</h2>
+          <div>
+            <div class="book-card">
+              <a href="/book?isbn=123456789">
+                <div><img src="https://storage.googleapis.com/du-prd/books/images/9781984818584.jpg" alt="" /></div>
+                <p>JACK REACHER</p>
+                <p>by <span>Michael Bidwill</span></p>
+              </a>
+            </div>
+            <div class="book-card">
+              <a href="/book?isbn=123456789">
+                <div><img src="https://storage.googleapis.com/du-prd/books/images/9781984818584.jpg" alt="" /></div>
+                <p>JACK REACHER</p>
+                <p>by <span>Michael Bidwill</span></p>
+              </a>
+            </div>
+            <div class="book-card">
+              <a href="/book?isbn=123456789">
+                <div><img src="https://storage.googleapis.com/du-prd/books/images/9781984818584.jpg" alt="" /></div>
+                <p>JACK REACHER</p>
+                <p>by <span>Michael Bidwill</span></p>
+              </a>
+            </div>
+            <div class="book-card">
+              <a href="/book?isbn=123456789">
+                <div><img src="https://storage.googleapis.com/du-prd/books/images/9781984818584.jpg" alt="" /></div>
+                <p>JACK REACHER</p>
+                <p>by <span>Michael Bidwill</span></p>
+              </a>
+            </div>
+            <div class="book-card">
+              <a href="/book?isbn=123456789">
+                <div><img src="https://storage.googleapis.com/du-prd/books/images/9781984818584.jpg" alt="" /></div>
+                <p>JACK REACHER HFJ</p>
+                <p>by <span>Michael Bidwill hhhhhhhhhhhhhhhhhhhhhhhhhhhhh</span></p>
+              </a>
+            </div>
+          </div>
+        </div> -->
+
+        <!--  -->
+      </div>
+    </main>
+  </body>
+</html>
