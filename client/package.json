@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel ./index.html --dist-dir ./server",
     "build": "parcel build ./index.html --public-url ./ --dist-dir ./dist",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d ./dist",
     "watchSass": "sass --watch ./src/styles/main.scss ./src/styles/main.css"
   },
   "keywords": [],
