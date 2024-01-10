@@ -1,7 +1,7 @@
-import { state, resetStateSearch, updateStateSearchResult, getLocalStorage, setLocalStorage } from "../model";
+import { state, resetStateSearch, updateStateSearchResult, getLocalStorage, setLocalStorage } from "../model/model";
 import type { BookObj } from "../types";
-import type BookObjCard from "./book-obj-card";
-import "./book-obj-card";
+import type BookObjCard from "../components/book-obj-card";
+import "../components/book-obj-card";
 
 export default class SearchPage extends HTMLElement {
   _data!: {

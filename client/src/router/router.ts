@@ -1,4 +1,4 @@
-interface Route {
+type Route = {
   path: string;
   view: string;
 }
