@@ -1,6 +1,6 @@
 import type { BookObj } from "../types";
 import type BookObjCard from "../components/book-obj-card";
-import { state, getLocalStorage, setLocalStorage } from "../model";
+import { state, getLocalStorage, setLocalStorage } from "../model/model";
 import "../components/book-obj-card";
 
 export default class SubLibPage extends HTMLElement {

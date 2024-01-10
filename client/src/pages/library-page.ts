@@ -1,6 +1,6 @@
-import type SubLibCard from "./sub-lib-card";
-import { state, getLocalStorage, setLocalStorage } from "../model";
-import "./sub-lib-card";
+import type SubLibCard from "../components/sub-lib-card";
+import { state, getLocalStorage, setLocalStorage } from "../model/model";
+import "../components/sub-lib-card";
 
 export default class LibraryPage extends HTMLElement {
   constructor() {
