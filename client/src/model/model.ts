@@ -7,13 +7,13 @@ import type {
   BookObj,
   Item,
   Root
-} from "./types";
+} from "../types";
 import {
   NY_TIMES_API_KEY,
   NY_TIMES_BEST_SELLERS_URL,
   NY_TIMES_API_CALL_LIMIT_SECONDS,
   GOOGLE_BOOKS_API_KEY
-} from "./config";
+} from "../config";
 
 const state: State = {
   viewedBook: "No result",
