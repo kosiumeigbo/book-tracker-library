@@ -1,5 +1,11 @@
 import type { BookObj, LibraryLocation, LibButtonPressedEventDetails } from "../types";
-import { state, addToLibraryBtnIsPressed, updateStateViewedBook, getLocalStorage, setLocalStorage } from "../model";
+import {
+  state,
+  addToLibraryBtnIsPressed,
+  updateStateViewedBook,
+  getLocalStorage,
+  setLocalStorage
+} from "../model/model";
 import bookImage from "url:../assets/images/generic-book.png";
 
 export default class BookPage extends HTMLElement {

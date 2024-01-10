@@ -1,8 +1,8 @@
-import "./router";
+import "./router/router";
 import "./scripts/navControl";
 import "./scripts/hamburgerControl";
-import "./components/home-page";
-import "./components/search-page";
-import "./components/library-page";
-import "./components/book-page";
-import "./components/sub-lib-page";
+import "./pages/home-page";
+import "./pages/search-page";
+import "./pages/library-page";
+import "./pages/book-page";
+import "./pages/sub-lib-page";

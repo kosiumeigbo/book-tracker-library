@@ -1,7 +1,7 @@
 import type { nyTimesHomePageListObj } from "../types";
-import type NytCategoryCard from "./nyt-category-card";
-import "./nyt-category-card";
-import { state, updateStateNyTimesBestSeller } from "../model";
+import type NytCategoryCard from "../components/nyt-category-card";
+import "../components/nyt-category-card";
+import { state, updateStateNyTimesBestSeller } from "../model/model";
 
 export class HomePage extends HTMLElement {
   _data!: nyTimesHomePageListObj[];
