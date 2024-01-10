@@ -12,24 +12,27 @@ export default class LibraryPage extends HTMLElement {
 
     this.render();
 
-    const subLibCards: NodeListOf<SubLibCard> = document.querySelectorAll("sub-lib-card");
+    const subLibCards: NodeListOf<SubLibCard> =
+      document.querySelectorAll("sub-lib-card");
     if (subLibCards.length !== 0 || subLibCards !== null) {
       subLibCards[0].data = {
         title: "Books In Progress",
         location: "booksInProgress",
-        books: state.libraryBooks.filter((book) => book.location === "booksInProgress")
+        books: state.libraryBooks.filter(
+          (book) => book.location === "booksInProgress",
+        ),
       };
 
       subLibCards[1].data = {
         title: "Books To Read",
         location: "booksToRead",
-        books: state.libraryBooks.filter((book) => book.location === "booksToRead")
+        books: state.libraryBooks.filter((book) => book.location === "booksToRead"),
       };
 
       subLibCards[2].data = {
         title: "Books Done",
         location: "booksDone",
-        books: state.libraryBooks.filter((book) => book.location === "booksDone")
+        books: state.libraryBooks.filter((book) => book.location === "booksDone"),
       };
     }
   }

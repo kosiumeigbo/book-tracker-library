@@ -1,4 +1,8 @@
-import type { BookObj, LibraryLocation, LibButtonPressedEventDetails } from "../types";
+import type {
+  BookObj,
+  LibraryLocation,
+  LibButtonPressedEventDetails,
+} from "../types";
 import { addToLibraryBtnIsPressed, state } from "../model/model";
 import bookImage from "url:../assets/images/generic-book.png";
 
@@ -34,7 +38,10 @@ export default class BookObjCard extends HTMLElement {
       console.log(isbn, btnLibrary);
 
       if (typeof isbn === "string" && typeof btnLibrary === "string") {
-        const updatedCardState = addToLibraryBtnIsPressed(btnLibrary as LibraryLocation, isbn);
+        const updatedCardState = addToLibraryBtnIsPressed(
+          btnLibrary as LibraryLocation,
+          isbn,
+        );
         console.log(updatedCardState);
 
         if (!(updatedCardState instanceof Error)) {
@@ -42,14 +49,24 @@ export default class BookObjCard extends HTMLElement {
         }
       }
 
-      const libBtnPressed = new CustomEvent<LibButtonPressedEventDetails>("lib-btn-pressed", {
-        bubbles: true,
-        detail: {
-          totalBooksDone: () => state.libraryBooks.filter((book) => book.location === "booksDone").length,
-          totalBooksInProgress: () => state.libraryBooks.filter((book) => book.location === "booksInProgress").length,
-          totalBooksToRead: () => state.libraryBooks.filter((book) => book.location === "booksToRead").length
-        }
-      });
+      const libBtnPressed = new CustomEvent<LibButtonPressedEventDetails>(
+        "lib-btn-pressed",
+        {
+          bubbles: true,
+          detail: {
+            totalBooksDone: () =>
+              state.libraryBooks.filter((book) => book.location === "booksDone")
+                .length,
+            totalBooksInProgress: () =>
+              state.libraryBooks.filter(
+                (book) => book.location === "booksInProgress",
+              ).length,
+            totalBooksToRead: () =>
+              state.libraryBooks.filter((book) => book.location === "booksToRead")
+                .length,
+          },
+        },
+      );
       this.dispatchEvent(libBtnPressed);
     }
   }
@@ -123,9 +140,9 @@ export default class BookObjCard extends HTMLElement {
   <div class="book-obj-card">
     <div class="book-obj-card__img">
       <a href="/book?isbn=${this._data.isbn}" data-link>
-        <img src="${this._data.imageSource ?? bookImage}" alt="${this._data.title ?? "N/A"} by ${
-          this._data.author ?? "N/A"
-        }" />
+        <img src="${this._data.imageSource ?? bookImage}" alt="${
+          this._data.title ?? "N/A"
+        } by ${this._data.author ?? "N/A"}" />
       </a>
     </div>
     <div class="book-obj-card__info">
