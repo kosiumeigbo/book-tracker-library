@@ -6,13 +6,13 @@ import type {
   LibraryLocation,
   BookObj,
   Item,
-  Root
+  Root,
 } from "../types";
 import {
   NY_TIMES_API_KEY,
   NY_TIMES_BEST_SELLERS_URL,
   NY_TIMES_API_CALL_LIMIT_SECONDS,
-  GOOGLE_BOOKS_API_KEY
+  GOOGLE_BOOKS_API_KEY,
 } from "../config";
 
 const state: State = {
@@ -20,11 +20,11 @@ const state: State = {
   nyTimesBestSeller: [],
   search: {
     query: "",
-    result: null
+    result: null,
   },
   libraryBooks: [],
   nonLibraryBooks: [],
-  locations: ["booksDone", "booksInProgress", "booksToRead"]
+  locations: ["booksDone", "booksInProgress", "booksToRead"],
 };
 
 // Function resets the state.search properties to their default values
@@ -59,7 +59,9 @@ const getLibraryBooksFromLocalStorage = function (): void {
 // Function that gets the nonLibraryBooks array from local storage
 // and saves it to state.nonLibraryBooks
 const getNonLibraryBooksFromLocalStorage = function (): void {
-  const nonLibraryBooks = JSON.parse(localStorage.getItem("nonLibraryBooks") ?? "[]");
+  const nonLibraryBooks = JSON.parse(
+    localStorage.getItem("nonLibraryBooks") ?? "[]",
+  );
   state.nonLibraryBooks = nonLibraryBooks;
 };
 
@@ -71,7 +73,10 @@ const getLocalStorage = function (): void {
 
 // Function takes in the isbn from the data-isbn property and the btnLibrary param is from the data-library property
 // on the pressed button. It returns either the
-const addToLibraryBtnIsPressed = function (btnDataset: LibraryLocation, isbn: string): Error | BookObj {
+const addToLibraryBtnIsPressed = function (
+  btnDataset: LibraryLocation,
+  isbn: string,
+): Error | BookObj {
   const bookLibraryIndex = state.libraryBooks.findIndex((bk) => bk.isbn === isbn);
   const bookLibrary = state.libraryBooks.find((bk) => bk.isbn === isbn);
 
@@ -95,7 +100,9 @@ const addToLibraryBtnIsPressed = function (btnDataset: LibraryLocation, isbn: st
     return bookLibrary;
   }
 
-  const bookNonLibraryIndex = state.nonLibraryBooks.findIndex((bk) => bk.isbn === isbn);
+  const bookNonLibraryIndex = state.nonLibraryBooks.findIndex(
+    (bk) => bk.isbn === isbn,
+  );
   const bookNonLibrary = state.nonLibraryBooks.find((bk) => bk.isbn === isbn);
 
   if (bookNonLibraryIndex !== -1 && bookNonLibrary !== undefined) {
@@ -117,7 +124,9 @@ const addToLibraryBtnIsPressed = function (btnDataset: LibraryLocation, isbn: st
 // If there's an error, then state's nyTimesBestSeller array becomes empty.
 const updateStateNyTimesBestSeller = async function (): Promise<void> {
   try {
-    const res = await fetch(`${NY_TIMES_BEST_SELLERS_URL}?api-key=${NY_TIMES_API_KEY}`);
+    const res = await fetch(
+      `${NY_TIMES_BEST_SELLERS_URL}?api-key=${NY_TIMES_API_KEY}`,
+    );
     if (!res.ok || res.status !== 200) throw new Error();
 
     const overviewBestSellers: BestSellersData[] = (await res.json()).results.lists;
@@ -129,7 +138,7 @@ const updateStateNyTimesBestSeller = async function (): Promise<void> {
           author: book.author,
           imageSource: book.book_image,
           isbn: book.primary_isbn13,
-          title: book.title
+          title: book.title,
         };
       });
 
@@ -154,7 +163,9 @@ keepUpdatingStateNyTimesBestSeller();
 // Function that accepts isbn as string, goes through Open Library to get the book
 // and updates state's search object, else returns an Error.
 // Will run when SearchPage is first loaded and also when the user presses the search button
-const updateStateSearchResult = async function (isbn: string): Promise<undefined | Error> {
+const updateStateSearchResult = async function (
+  isbn: string,
+): Promise<undefined | Error> {
   try {
     state.search.query = isbn;
 
@@ -166,8 +177,12 @@ const updateStateSearchResult = async function (isbn: string): Promise<undefined
       return;
     }
 
-    const bookInLibrary = state.libraryBooks.find((book) => book.isbn === bookSearchResult.isbn);
-    const bookNotInLibrary = state.nonLibraryBooks.find((book) => book.isbn === bookSearchResult.isbn);
+    const bookInLibrary = state.libraryBooks.find(
+      (book) => book.isbn === bookSearchResult.isbn,
+    );
+    const bookNotInLibrary = state.nonLibraryBooks.find(
+      (book) => book.isbn === bookSearchResult.isbn,
+    );
 
     if (bookInLibrary !== undefined) {
       state.search.result = bookInLibrary;
@@ -187,7 +202,9 @@ const updateStateSearchResult = async function (isbn: string): Promise<undefined
 // Function that accepts isbn as string, goes through Open Library to get the book
 // and updates state's viewed book into a BookObj or "No result", else returns an Error
 // Will run when BookPage is first loaded. The isbn param is taken from the isbn query parameter on the URL
-const updateStateViewedBook = async function (isbn: string): Promise<undefined | Error> {
+const updateStateViewedBook = async function (
+  isbn: string,
+): Promise<undefined | Error> {
   try {
     const bookSearchResult = await getBookObj(isbn);
     if (bookSearchResult instanceof Error) throw bookSearchResult;
@@ -197,8 +214,12 @@ const updateStateViewedBook = async function (isbn: string): Promise<undefined |
       return;
     }
 
-    const bookInLibrary = state.libraryBooks.find((book) => book.isbn === bookSearchResult.isbn);
-    const bookNotInLibrary = state.nonLibraryBooks.find((book) => book.isbn === bookSearchResult.isbn);
+    const bookInLibrary = state.libraryBooks.find(
+      (book) => book.isbn === bookSearchResult.isbn,
+    );
+    const bookNotInLibrary = state.nonLibraryBooks.find(
+      (book) => book.isbn === bookSearchResult.isbn,
+    );
 
     if (bookInLibrary !== undefined) {
       state.viewedBook = bookInLibrary;
@@ -217,11 +238,16 @@ const updateStateViewedBook = async function (isbn: string): Promise<undefined |
 
 // Function to get the book object from either Open Library or Google Books API
 // Google Books API is the first choice, if it returns an error or "No result", then Open Library is used
-const getBookObj = async function (isbn: string): Promise<BookObj | "No result" | Error> {
+const getBookObj = async function (
+  isbn: string,
+): Promise<BookObj | "No result" | Error> {
   try {
     const googleBooksSearchResult = await getBookObjFromGoogleBooks(isbn);
 
-    if (googleBooksSearchResult instanceof Error || typeof googleBooksSearchResult === "string") {
+    if (
+      googleBooksSearchResult instanceof Error ||
+      typeof googleBooksSearchResult === "string"
+    ) {
       const openLibrarySearchResult = await getBookObjFromOpenLibrary(isbn);
       if (openLibrarySearchResult instanceof Error) throw openLibrarySearchResult;
 
@@ -240,9 +266,13 @@ const getBookObj = async function (isbn: string): Promise<BookObj | "No result" 
 
 // Function that accepts isbn as string, goes through Open Library to get the book
 // and returns either a BookObj object or "No result", else returns an Error
-const getBookObjFromOpenLibrary = async function (isbn: string): Promise<BookObj | "No result" | Error> {
+const getBookObjFromOpenLibrary = async function (
+  isbn: string,
+): Promise<BookObj | "No result" | Error> {
   try {
-    const res = await fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`);
+    const res = await fetch(
+      `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`,
+    );
     if (!res.ok || res.status !== 200) throw new Error();
 
     const dataOpenLibrary = await res.json();
@@ -263,18 +293,21 @@ const getBookObjFromOpenLibrary = async function (isbn: string): Promise<BookObj
     const bkImageSource = mainObject.cover?.large ?? null;
 
     // To get isbn
-    const bkIsbnArr = mainObject.identifiers.isbn_13 ?? mainObject.identifiers.isbn_10;
+    const bkIsbnArr =
+      mainObject.identifiers.isbn_13 ?? mainObject.identifiers.isbn_10;
     const bkIsbn = bkIsbnArr[0];
 
     // To get pages
     const bkPagesCheck = mainObject.number_of_pages ?? mainObject.pagination ?? null;
-    const bkPages = typeof bkPagesCheck === "number" ? bkPagesCheck.toString() : bkPagesCheck;
+    const bkPages =
+      typeof bkPagesCheck === "number" ? bkPagesCheck.toString() : bkPagesCheck;
 
     // To get year published
     const bkYearPublished = mainObject.publish_date ?? null;
 
     // To get publisher
-    const bkPublisher = mainObject.publishers?.map((publ) => publ.name).join(", ") ?? null;
+    const bkPublisher =
+      mainObject.publishers?.map((publ) => publ.name).join(", ") ?? null;
 
     // To get title
     const bkTitle = mainObject.title ?? null;
@@ -291,7 +324,7 @@ const getBookObjFromOpenLibrary = async function (isbn: string): Promise<BookObj
       publisher: bkPublisher,
       title: bkTitle,
       link: bkLink,
-      location: "not-in-library"
+      location: "not-in-library",
     };
 
     return objToReturn;
@@ -303,9 +336,13 @@ const getBookObjFromOpenLibrary = async function (isbn: string): Promise<BookObj
 
 // Function that accepts isbn as string, goes through Google Books API to get the book
 // and returns either a BookObj object or "No result", else returns an Error
-const getBookObjFromGoogleBooks = async function (isbn: string): Promise<BookObj | "No result" | Error> {
+const getBookObjFromGoogleBooks = async function (
+  isbn: string,
+): Promise<BookObj | "No result" | Error> {
   try {
-    const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=${GOOGLE_BOOKS_API_KEY}`);
+    const res = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=${GOOGLE_BOOKS_API_KEY}`,
+    );
 
     if (!res.ok || res.status !== 200) throw new Error();
 
@@ -322,18 +359,24 @@ const getBookObjFromGoogleBooks = async function (isbn: string): Promise<BookObj
 
     // To get image source
     // const bkImageSource = mainObject.volumeInfo.imageLinks?.thumbnail ?? null;
-    const bkImageSource = volumeInfo.imageLinks?.thumbnail ?? volumeInfo.imageLinks?.smallThumbnail ?? null;
+    const bkImageSource =
+      volumeInfo.imageLinks?.thumbnail ??
+      volumeInfo.imageLinks?.smallThumbnail ??
+      null;
 
     // To get isbn
     // const bkIsbn = mainObject.volumeInfo.industryIdentifiers[0].identifier;
     const bkIsbn =
-      volumeInfo.industryIdentifiers?.find((obj) => obj.type === "ISBN_13")?.identifier ??
-      volumeInfo.industryIdentifiers?.find((obj) => obj.type === "ISBN_10")?.identifier ??
+      volumeInfo.industryIdentifiers?.find((obj) => obj.type === "ISBN_13")
+        ?.identifier ??
+      volumeInfo.industryIdentifiers?.find((obj) => obj.type === "ISBN_10")
+        ?.identifier ??
       "N/A";
 
     // To get pages
     // const bkPages = mainObject.volumeInfo.pageCount?.toString() ?? null;
-    const bkPages = volumeInfo.pageCount === 0 ? null : volumeInfo.pageCount?.toString() ?? null;
+    const bkPages =
+      volumeInfo.pageCount === 0 ? null : volumeInfo.pageCount?.toString() ?? null;
 
     // To get year published
     // const bkYearPublished = mainObject.volumeInfo.publishedDate ?? null;
@@ -359,7 +402,7 @@ const getBookObjFromGoogleBooks = async function (isbn: string): Promise<BookObj
       publisher: bkPublisher,
       title: bkTitle,
       link: bkLink,
-      location: "not-in-library"
+      location: "not-in-library",
     };
 
     return objToReturn;
@@ -384,5 +427,5 @@ export {
   setLocalStorage,
   getLibraryBooksFromLocalStorage,
   getNonLibraryBooksFromLocalStorage,
-  getLocalStorage
+  getLocalStorage,
 };

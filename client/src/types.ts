@@ -10,7 +10,7 @@ export type BestSellersData = {
   list_image_width: any;
   list_image_height: any;
   books: BookRes[];
-}
+};
 
 type BookRes = {
   age_group: string;
@@ -38,12 +38,12 @@ type BookRes = {
   updated_date: string;
   weeks_on_list: number;
   buy_links: BuyLink[];
-}
+};
 
 type BuyLink = {
   name: string;
   url: string;
-}
+};
 
 /* ---------------------------------------- */
 
@@ -62,58 +62,58 @@ export type OpenLibraryData = {
   cover?: Cover;
   pagination?: string;
   number_of_pages?: number;
-}
+};
 
 export type Author = {
   url: string;
   name: string;
-}
+};
 
 export type Identifiers = {
   isbn_10: string[];
   isbn_13?: string[];
   openlibrary: string[];
-}
+};
 
 export type Publisher = {
   name: string;
-}
+};
 
 export type Subject = {
   name: string;
   url: string;
-}
+};
 
 export type Ebook = {
   preview_url: string;
   availability: string;
   formats: Formats;
   read_url: string;
-}
+};
 
 export type Formats = {
   pdf: Pdf;
   epub: Epub;
   text: Text;
-}
+};
 
 export type Pdf = {
   url: string;
-}
+};
 
 export type Epub = {
   url: string;
-}
+};
 
 export type Text = {
   url: string;
-}
+};
 
 export type Cover = {
   small: string;
   medium: string;
   large: string;
-}
+};
 
 /* ---------------------------------------- */
 
@@ -123,7 +123,7 @@ export type Root = {
   kind: string;
   totalItems: number;
   items: Item[];
-}
+};
 
 export type Item = {
   kind: string;
@@ -134,7 +134,7 @@ export type Item = {
   saleInfo: SaleInfo;
   accessInfo: AccessInfo;
   searchInfo: SearchInfo;
-}
+};
 
 export type VolumeInfo = {
   title: string;
@@ -157,33 +157,33 @@ export type VolumeInfo = {
   previewLink: string;
   infoLink: string;
   canonicalVolumeLink: string;
-}
+};
 
 export type IndustryIdentifier = {
   type: string;
   identifier: string;
-}
+};
 
 export type ReadingModes = {
   text: boolean;
   image: boolean;
-}
+};
 
 export type PanelizationSummary = {
   containsEpubBubbles: boolean;
   containsImageBubbles: boolean;
-}
+};
 
 export type ImageLinks = {
   smallThumbnail: string;
   thumbnail: string;
-}
+};
 
 export type SaleInfo = {
   country: string;
   saleability: string;
   isEbook: boolean;
-}
+};
 
 export type AccessInfo = {
   country: string;
@@ -196,19 +196,19 @@ export type AccessInfo = {
   webReaderLink: string;
   accessViewStatus: string;
   quoteSharingAllowed: boolean;
-}
+};
 
 export type EpubG = {
   isAvailable: boolean;
-}
+};
 
 export type PdfG = {
   isAvailable: boolean;
-}
+};
 
 export type SearchInfo = {
   textSnippet: string;
-}
+};
 
 /* ---------------------------------------- */
 
@@ -218,7 +218,7 @@ export type SearchInfo = {
 export type nyTimesHomePageListObj = {
   listName: string;
   books: BookObjNYT[];
-}
+};
 
 // Interface for the object for a NYT Best Sellers book that will be on the home page
 export type BookObjNYT = {
@@ -226,7 +226,7 @@ export type BookObjNYT = {
   imageSource: string;
   isbn: string;
   title: string;
-}
+};
 
 // Interface for the basic fundamental book object to display on the UI
 export type BookObj = {
@@ -239,23 +239,27 @@ export type BookObj = {
   title: string | null;
   link: string | null;
   location: LibraryLocation;
-}
+};
 
-export type LibraryLocation = "booksDone" | "booksInProgress" | "booksToRead" | "not-in-library";
+export type LibraryLocation =
+  | "booksDone"
+  | "booksInProgress"
+  | "booksToRead"
+  | "not-in-library";
 
 // Interface for custom event to update library numbers in nav section
 export type LibButtonPressedEventDetails = {
   totalBooksToRead: () => number;
   totalBooksDone: () => number;
   totalBooksInProgress: () => number;
-}
+};
 
 // Interface for data in the sub-lib-card component
 export type SubLibCardObject = {
   title: string;
   location: LibraryLocation;
   books: BookObj[];
-}
+};
 
 /* ---------------------------------------- */
 
@@ -271,6 +275,6 @@ export type State = {
   libraryBooks: BookObj[];
   nonLibraryBooks: BookObj[];
   locations: LibraryLocation[];
-}
+};
 
 /* ---------------------------------------- */
