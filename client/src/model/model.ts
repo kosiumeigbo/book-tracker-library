@@ -40,7 +40,10 @@ const setLibraryBooksInLocalStorage = function (): void {
 
 // Function that saves the state.nonLibraryBooks array to local storage
 const setNonLibraryBooksInLocalStorage = function (): void {
-  localStorage.setItem("nonLibraryBooks", JSON.stringify(state.nonLibraryBooks));
+  localStorage.setItem(
+    "nonLibraryBooks",
+    JSON.stringify(state.nonLibraryBooks),
+  );
 };
 
 // Function that runs both setLibraryBooksInLocalStorage and setNonLibraryBooksInLocalStorage functions
@@ -77,7 +80,9 @@ const addToLibraryBtnIsPressed = function (
   btnDataset: LibraryLocation,
   isbn: string,
 ): Error | BookObj {
-  const bookLibraryIndex = state.libraryBooks.findIndex((bk) => bk.isbn === isbn);
+  const bookLibraryIndex = state.libraryBooks.findIndex(
+    (bk) => bk.isbn === isbn,
+  );
   const bookLibrary = state.libraryBooks.find((bk) => bk.isbn === isbn);
 
   if (bookLibraryIndex !== -1 && bookLibrary !== undefined) {
@@ -129,7 +134,8 @@ const updateStateNyTimesBestSeller = async function (): Promise<void> {
     );
     if (!res.ok || res.status !== 200) throw new Error();
 
-    const overviewBestSellers: BestSellersData[] = (await res.json()).results.lists;
+    const overviewBestSellers: BestSellersData[] = (await res.json()).results
+      .lists;
 
     state.nyTimesBestSeller = overviewBestSellers.map((obj) => {
       const listArea: string = obj.list_name;
@@ -249,7 +255,8 @@ const getBookObj = async function (
       typeof googleBooksSearchResult === "string"
     ) {
       const openLibrarySearchResult = await getBookObjFromOpenLibrary(isbn);
-      if (openLibrarySearchResult instanceof Error) throw openLibrarySearchResult;
+      if (openLibrarySearchResult instanceof Error)
+        throw openLibrarySearchResult;
 
       if (typeof openLibrarySearchResult === "string") {
         return openLibrarySearchResult;
@@ -298,7 +305,8 @@ const getBookObjFromOpenLibrary = async function (
     const bkIsbn = bkIsbnArr[0];
 
     // To get pages
-    const bkPagesCheck = mainObject.number_of_pages ?? mainObject.pagination ?? null;
+    const bkPagesCheck =
+      mainObject.number_of_pages ?? mainObject.pagination ?? null;
     const bkPages =
       typeof bkPagesCheck === "number" ? bkPagesCheck.toString() : bkPagesCheck;
 
@@ -376,7 +384,9 @@ const getBookObjFromGoogleBooks = async function (
     // To get pages
     // const bkPages = mainObject.volumeInfo.pageCount?.toString() ?? null;
     const bkPages =
-      volumeInfo.pageCount === 0 ? null : volumeInfo.pageCount?.toString() ?? null;
+      volumeInfo.pageCount === 0
+        ? null
+        : volumeInfo.pageCount?.toString() ?? null;
 
     // To get year published
     // const bkYearPublished = mainObject.volumeInfo.publishedDate ?? null;

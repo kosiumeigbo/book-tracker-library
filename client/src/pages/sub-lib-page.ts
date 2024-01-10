@@ -46,7 +46,9 @@ export default class SubLibPage extends HTMLElement {
       return;
     }
 
-    this.data = state.libraryBooks.filter((book) => book.location === subLibrary);
+    this.data = state.libraryBooks.filter(
+      (book) => book.location === subLibrary,
+    );
     this.render(subLibrary);
 
     const allBookObjCard: NodeListOf<BookObjCard> =

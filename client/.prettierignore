@@ -5,3 +5,4 @@ server
 .parcel-cache
 testData.ts
 src/components/*TestComponent.ts
+*.html
