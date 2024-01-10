@@ -21,9 +21,11 @@ export default class SubLibCard extends HTMLElement {
       const subLibBookCards: NodeListOf<SubLibBookCard> =
         document.querySelectorAll("sub-lib-book-card");
       if (subLibBookCards.length !== 0 || subLibBookCards !== null) {
-        subLibBookCards.forEach((subLibBookCard: SubLibBookCard, index: number) => {
-          subLibBookCard.data = this.data.books[index];
-        });
+        subLibBookCards.forEach(
+          (subLibBookCard: SubLibBookCard, index: number) => {
+            subLibBookCard.data = this.data.books[index];
+          },
+        );
       }
     }
   }

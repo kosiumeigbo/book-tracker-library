@@ -26,13 +26,17 @@ export default class LibraryPage extends HTMLElement {
       subLibCards[1].data = {
         title: "Books To Read",
         location: "booksToRead",
-        books: state.libraryBooks.filter((book) => book.location === "booksToRead"),
+        books: state.libraryBooks.filter(
+          (book) => book.location === "booksToRead",
+        ),
       };
 
       subLibCards[2].data = {
         title: "Books Done",
         location: "booksDone",
-        books: state.libraryBooks.filter((book) => book.location === "booksDone"),
+        books: state.libraryBooks.filter(
+          (book) => book.location === "booksDone",
+        ),
       };
     }
   }

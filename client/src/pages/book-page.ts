@@ -89,7 +89,9 @@ export default class BookPage extends HTMLElement {
   }
 
   btnPressed(e: Event): void {
-    const libButton = (e.target as HTMLElement).closest("[data-library][data-isbn]");
+    const libButton = (e.target as HTMLElement).closest(
+      "[data-library][data-isbn]",
+    );
     console.log(libButton);
 
     if (libButton !== null) {
@@ -123,8 +125,9 @@ export default class BookPage extends HTMLElement {
                 (book) => book.location === "booksInProgress",
               ).length,
             totalBooksToRead: () =>
-              state.libraryBooks.filter((book) => book.location === "booksToRead")
-                .length,
+              state.libraryBooks.filter(
+                (book) => book.location === "booksToRead",
+              ).length,
           },
         },
       );
@@ -206,9 +209,11 @@ export default class BookPage extends HTMLElement {
         }</span></p>
       </div>
       <div class="book-page__panel">
-        <div class="image"><img src="${this.data.imageSource ?? bookImage}" alt="${
-          this.data.title ?? "N/A"
-        } by ${this.data.author ?? "N/A"}" /></div>
+        <div class="image"><img src="${
+          this.data.imageSource ?? bookImage
+        }" alt="${this.data.title ?? "N/A"} by ${
+          this.data.author ?? "N/A"
+        }" /></div>
         <div class="add-to-lib-buttons">
           ${this.getLibraryButtonsMarkUp(this.data)}
         </div>
