@@ -1,10 +1,4 @@
-import {
-  state,
-  resetStateSearch,
-  updateStateSearchResult,
-  getLocalStorage,
-  setLocalStorage,
-} from "../model/model";
+import { state, resetStateSearch, updateStateSearchResult, getLocalStorage, setLocalStorage } from "../model/model";
 import type { BookObj } from "../types";
 import type BookObjCard from "../components/book-obj-card";
 import "../components/book-obj-card";
@@ -39,11 +33,7 @@ export default class SearchPage extends HTMLElement {
     this.render();
 
     const bookObjCard = this.querySelector("book-obj-card");
-    if (
-      bookObjCard !== null &&
-      this._data.result !== null &&
-      this._data.result !== "No result"
-    ) {
+    if (bookObjCard !== null && this._data.result !== null && this._data.result !== "No result") {
       (bookObjCard as BookObjCard).data = this._data.result;
     }
 
@@ -58,18 +48,11 @@ export default class SearchPage extends HTMLElement {
   }
 
   async updateThisData(e: Event): Promise<void> {
-    const searchBookButton = (e.target as HTMLElement).closest(
-      "#book-search-btn",
-    );
+    const searchBookButton = (e.target as HTMLElement).closest("#book-search-btn");
     const searchQuery = this.querySelector("input")?.value?.trim();
     const searchResultsArea = this.querySelector(".search-results");
 
-    if (
-      searchBookButton === null ||
-      searchQuery === undefined ||
-      searchResultsArea === null
-    )
-      return;
+    if (searchBookButton === null || searchQuery === undefined || searchResultsArea === null) return;
 
     if (searchQuery.length === 0) {
       searchResultsArea.innerHTML = `<h2>Please enter a value</h2>`;
@@ -89,11 +72,7 @@ export default class SearchPage extends HTMLElement {
       this.render();
 
       const bookObjCard = this.querySelector("book-obj-card");
-      if (
-        bookObjCard !== null &&
-        this._data.result !== null &&
-        this._data.result !== "No result"
-      ) {
+      if (bookObjCard !== null && this._data.result !== null && this._data.result !== "No result") {
         (bookObjCard as BookObjCard).data = this._data.result;
       }
     } catch (e) {
@@ -127,9 +106,7 @@ export default class SearchPage extends HTMLElement {
         <label><h2>Search by book ISBN:</h2></label>
         <h2>Please enter only the numbers</h2>
         <div>
-          <input type="text" id="book-search" autocomplete="off" value="${
-            this._data.query
-          }" />
+          <input type="text" id="book-search" autocomplete="off" value="${this._data.query}" />
           <button id="book-search-btn"><p>FIND BOOK</p></button>
         </div>
       </div>

@@ -241,11 +241,7 @@ export type BookObj = {
   location: LibraryLocation;
 };
 
-export type LibraryLocation =
-  | "booksDone"
-  | "booksInProgress"
-  | "booksToRead"
-  | "not-in-library";
+export type LibraryLocation = "booksDone" | "booksInProgress" | "booksToRead" | "not-in-library";
 
 // Interface for custom event to update library numbers in nav section
 export type LibButtonPressedEventDetails = {

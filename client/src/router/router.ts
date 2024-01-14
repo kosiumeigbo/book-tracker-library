@@ -66,14 +66,8 @@ window.addEventListener("popstate", (e) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("click", (e: Event) => {
-    const navLink: HTMLAnchorElement | null = (
-      e.target as HTMLElement
-    )?.closest("[data-link]");
-    if (
-      navLink !== null &&
-      navLink !== undefined &&
-      navLink.hasAttribute("href")
-    ) {
+    const navLink: HTMLAnchorElement | null = (e.target as HTMLElement)?.closest("[data-link]");
+    if (navLink !== null && navLink !== undefined && navLink.hasAttribute("href")) {
       e.preventDefault();
       navigateTo(navLink.href);
     }
