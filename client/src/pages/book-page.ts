@@ -1,8 +1,4 @@
-import type {
-  BookObj,
-  LibraryLocation,
-  LibButtonPressedEventDetails,
-} from "../types";
+import type { BookObj, LibraryLocation, LibButtonPressedEventDetails } from "../types";
 import {
   state,
   addToLibraryBtnIsPressed,
@@ -89,9 +85,7 @@ export default class BookPage extends HTMLElement {
   }
 
   btnPressed(e: Event): void {
-    const libButton = (e.target as HTMLElement).closest(
-      "[data-library][data-isbn]",
-    );
+    const libButton = (e.target as HTMLElement).closest("[data-library][data-isbn]");
     console.log(libButton);
 
     if (libButton !== null) {
@@ -100,10 +94,7 @@ export default class BookPage extends HTMLElement {
       console.log(isbn, btnLibrary);
 
       if (typeof isbn === "string" && typeof btnLibrary === "string") {
-        const updatedCardState = addToLibraryBtnIsPressed(
-          btnLibrary as LibraryLocation,
-          isbn,
-        );
+        const updatedCardState = addToLibraryBtnIsPressed(btnLibrary as LibraryLocation, isbn);
         console.log(updatedCardState);
 
         if (!(updatedCardState instanceof Error)) {
@@ -112,25 +103,14 @@ export default class BookPage extends HTMLElement {
         }
       }
 
-      const libBtnPressed = new CustomEvent<LibButtonPressedEventDetails>(
-        "lib-btn-pressed",
-        {
-          bubbles: true,
-          detail: {
-            totalBooksDone: () =>
-              state.libraryBooks.filter((book) => book.location === "booksDone")
-                .length,
-            totalBooksInProgress: () =>
-              state.libraryBooks.filter(
-                (book) => book.location === "booksInProgress",
-              ).length,
-            totalBooksToRead: () =>
-              state.libraryBooks.filter(
-                (book) => book.location === "booksToRead",
-              ).length,
-          },
+      const libBtnPressed = new CustomEvent<LibButtonPressedEventDetails>("lib-btn-pressed", {
+        bubbles: true,
+        detail: {
+          totalBooksDone: () => state.libraryBooks.filter((book) => book.location === "booksDone").length,
+          totalBooksInProgress: () => state.libraryBooks.filter((book) => book.location === "booksInProgress").length,
+          totalBooksToRead: () => state.libraryBooks.filter((book) => book.location === "booksToRead").length,
         },
-      );
+      });
       this.dispatchEvent(libBtnPressed);
     }
   }
@@ -204,14 +184,10 @@ export default class BookPage extends HTMLElement {
     <div class="book-page">
       <div class="book-page__title">
         <h1>${this.data.title ?? "N/A"}</h1>
-        <p>by <span style="text-decoration: underline; font-style: italic">${
-          this.data.author ?? "N/A"
-        }</span></p>
+        <p>by <span style="text-decoration: underline; font-style: italic">${this.data.author ?? "N/A"}</span></p>
       </div>
       <div class="book-page__panel">
-        <div class="image"><img src="${
-          this.data.imageSource ?? bookImage
-        }" alt="${this.data.title ?? "N/A"} by ${
+        <div class="image"><img src="${this.data.imageSource ?? bookImage}" alt="${this.data.title ?? "N/A"} by ${
           this.data.author ?? "N/A"
         }" /></div>
         <div class="add-to-lib-buttons">
@@ -226,9 +202,7 @@ export default class BookPage extends HTMLElement {
       <div class="book-page__info">
         <div class="book-page__info__title">
           <h1>${this.data.title ?? "N/A"}</h1>
-          <p>by <span style="text-decoration: underline; font-style: italic">${
-            this.data.author ?? "N/A"
-          }</span></p>
+          <p>by <span style="text-decoration: underline; font-style: italic">${this.data.author ?? "N/A"}</span></p>
         </div>
         <div>
           <h3>ISBN</h3>

@@ -7,12 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const elBooksDone = document.getElementById("books-done-total");
   const elLibraryTotal = document.getElementById("library-total");
 
-  if (
-    elBooksToRead !== null &&
-    elBooksInProgress !== null &&
-    elBooksDone !== null &&
-    elLibraryTotal !== null
-  ) {
+  if (elBooksToRead !== null && elBooksInProgress !== null && elBooksDone !== null && elLibraryTotal !== null) {
     document.addEventListener("lib-btn-pressed", (e) => {
       const detail = (e as CustomEvent<LibButtonPressedEventDetails>).detail;
       console.log(detail);
@@ -29,17 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     getLocalStorage();
 
-    const totalBooksToRead = state.libraryBooks.filter(
-      (book) => book.location === "booksToRead",
-    ).length;
-    const totalBooksInProgress = state.libraryBooks.filter(
-      (book) => book.location === "booksInProgress",
-    ).length;
-    const totalBooksDone = state.libraryBooks.filter(
-      (book) => book.location === "booksDone",
-    ).length;
-    const totalLibraryBooks =
-      totalBooksToRead + totalBooksInProgress + totalBooksDone;
+    const totalBooksToRead = state.libraryBooks.filter((book) => book.location === "booksToRead").length;
+    const totalBooksInProgress = state.libraryBooks.filter((book) => book.location === "booksInProgress").length;
+    const totalBooksDone = state.libraryBooks.filter((book) => book.location === "booksDone").length;
+    const totalLibraryBooks = totalBooksToRead + totalBooksInProgress + totalBooksDone;
 
     elBooksToRead.textContent = totalBooksToRead.toString();
     elBooksInProgress.textContent = totalBooksInProgress.toString();
