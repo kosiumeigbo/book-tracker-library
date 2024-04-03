@@ -8,12 +8,11 @@ import type {
   Item,
   Root,
 } from "../types";
-import {
-  NY_TIMES_API_KEY,
-  NY_TIMES_BEST_SELLERS_URL,
-  NY_TIMES_API_CALL_LIMIT_SECONDS,
-  GOOGLE_BOOKS_API_KEY,
-} from "../config";
+
+const NY_TIMES_API_CALL_LIMIT_SECONDS = process.env.NY_TIMES_API_CALL_LIMIT_SECONDS as string;
+const NY_TIMES_BEST_SELLERS_URL = process.env.NY_TIMES_BEST_SELLERS_URL as string;
+const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY as string;
+const NY_TIMES_API_KEY = process.env.NY_TIMES_API_KEY as string;
 
 const state: State = {
   viewedBook: "No result",
@@ -147,7 +146,7 @@ const updateStateNyTimesBestSeller = async function (): Promise<void> {
 const keepUpdatingStateNyTimesBestSeller = async function (): Promise<void> {
   await updateStateNyTimesBestSeller();
 
-  setInterval(updateStateNyTimesBestSeller, NY_TIMES_API_CALL_LIMIT_SECONDS);
+  setInterval(updateStateNyTimesBestSeller, Number(NY_TIMES_API_CALL_LIMIT_SECONDS));
 };
 keepUpdatingStateNyTimesBestSeller();
 
