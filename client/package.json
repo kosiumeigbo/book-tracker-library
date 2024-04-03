@@ -8,7 +8,6 @@
     "lint": "eslint . --ext .ts",
     "prettierFormat": "prettier --write \"src/**/*.ts\"",
     "prettierCheck": "prettier --check \"src/**/*.ts\"",
-    "deploy": "gh-pages -d ./dist",
     "watchSass": "sass --watch ./src/styles/main.scss ./src/styles/main.css"
   },
   "keywords": [],
@@ -20,6 +19,7 @@
     "@babel/preset-env": "^7.23.2",
     "@parcel/transformer-sass": "^2.10.1",
     "@parcel/transformer-typescript-tsc": "^2.10.1",
+    "@types/node": "^20.12.3",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
     "eslint": "^8.51.0",
@@ -32,5 +32,8 @@
     "parcel": "^2.10.1",
     "prettier": "3.0.3",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }
