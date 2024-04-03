@@ -146,6 +146,7 @@ const updateStateNyTimesBestSeller = async function (): Promise<void> {
 const keepUpdatingStateNyTimesBestSeller = async function (): Promise<void> {
   await updateStateNyTimesBestSeller();
 
+  // eslint-disable-next-line  @typescript-eslint/no-misused-promises
   setInterval(updateStateNyTimesBestSeller, Number(NY_TIMES_API_CALL_LIMIT_SECONDS));
 };
 keepUpdatingStateNyTimesBestSeller();
