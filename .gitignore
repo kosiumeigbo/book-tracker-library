@@ -5,5 +5,4 @@ client/server
 **/.parcel-cache
 **/testData.ts
 client/src/components/*TestComponent.ts
-client/src/config.ts
 .env
